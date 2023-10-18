@@ -3,25 +3,32 @@
 </script>
 
 <template>
+    <div class="margen">
 
+        <a href="./RegistroLibro">Registrar Libro Nuevo</a>
 
-<a href="./RegistroLibro">Registrar Libro Nuevo</a>
+    </div>
 </template>
 
 <style scoped>
-a{
-    border: 2px solid lightblue;
-    border-radius: 10%;
-    background-color: blue;
+a {
+    border: 2px solid rgb(140, 158, 144);
+    border-radius: 5%;
+    background-color: rgb(52, 121, 66);
     color: white;
     text-decoration: none;
     padding: 10px;
     transition: 0.5s;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Verdana, sans-serif;
 
 }
-a:hover{
+
+a:hover {
     background-color: white;
-    color: lightseagreen;
+    color: rgb(140, 158, 144);
+}
+
+.margen {
+    margin: 20px 0px 0px 20px;
 }
 </style>

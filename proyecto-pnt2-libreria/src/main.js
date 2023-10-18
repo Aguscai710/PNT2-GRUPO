@@ -5,15 +5,12 @@ import App from './App.vue'
 import Biblioteca from './components/Biblioteca.vue'
 import Persona from "./components/Persona.vue";
 import Login from './components/Login.vue'
-import Confirmaciones from  './components/Confirmacion.vue'
+import Confirmacion from './components/Confirmacion.vue'
 import Peticiones from './components/Peticiones.vue'
 import MisLibros from './components/MisLibros.vue'
 import Registrarse from './components/Registrarse.vue'
 import RegistroLibro from './components/RegistroLibro.vue'
 import Libro from "./components/Libro.vue";
-
-
-
 
 
 const routes = [
@@ -22,7 +19,7 @@ const routes = [
 	{ path: "/Login", component: Login },
 	{ path: "/Peticiones", component: Peticiones },
 	{ path: "/MisLibros", component: MisLibros },
-	{ path: "/Confirmaciones", component: Confirmaciones },
+	{ path: "/Confirmacion", component: Confirmacion },
 	{ path: "/Registrarse", component: Registrarse },
 	{ path: "/RegistroLibro", component: RegistroLibro },
 	{ path: "/Libro", component: Libro }
