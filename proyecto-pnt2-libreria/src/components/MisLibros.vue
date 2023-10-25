@@ -1,3 +1,7 @@
+<!--
+    Crear un libro y mandarlo a la API de mis libros para  aptos prestar
+    Tener un boton para dar de baja uno de mis libros en la API
+-->
 <script setup>
 
 </script>

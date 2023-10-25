@@ -1,4 +1,8 @@
+<!--
+    Validar que el usuario exista para que pueda ingresar(en la API)
+-->
 <script setup>
+    import {ref} from 'vue'
 
 </script>
 
@@ -36,7 +40,6 @@
     border-radius: 2%;
 }
 
-.background {
-    background-color: rgb(255, 255, 255);
-}
+
+
 </style>
