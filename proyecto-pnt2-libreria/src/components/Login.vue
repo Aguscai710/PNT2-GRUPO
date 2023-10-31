@@ -30,7 +30,7 @@
     font-size: 1.2em;
     text-align: center;
     margin: auto;
-    background-image: linear-gradient(rgb(52, 121, 66), rgb(140, 158, 144));
+    background-color: white;
     display: flex;
     flex-direction: column;
     margin-top: 160px;
@@ -38,6 +38,12 @@
     height: 250px;
     padding: 10px;
     border-radius: 2%;
+    box-shadow: 8px 4px 6px black;
+}
+input{
+    border: none;
+    border-bottom: 5px solid #86CD6A;
+    border-right: 5px solid #86CD6A ;
 }
 
 
