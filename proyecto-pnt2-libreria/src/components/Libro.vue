@@ -4,6 +4,30 @@ const props = defineProps({
 
 
 })
+
+const crearPeticion = () => {
+    const peticion = {
+        id : props.libro.id,
+        usuario : props.libro.usuario, //ver como guardar la variable usuario para usarla en todos lados
+        estado : "en espera"
+    }
+    fetch(url, {
+        method: 'PUT', // or PATCH
+        headers: {'content-type':'application/json'},
+        body: JSON.stringify({Peticion: peticion})
+        }).then(res => {
+  if (res.ok) {
+      return res.json();
+  }
+  // handle error
+}).then(task => {
+  // Do something with updated task
+}).catch(error => {
+  // handle error
+})
+
+}
+
 </script>
 
 <template>
@@ -15,7 +39,7 @@ const props = defineProps({
                 <h5 class="card-title"><b>Descripción:</b> {{ libro.descripcion }}</h5>
                 <h5 class="card-title"><b>Autor:</b> {{ libro.autor }}</h5>
                 <h5 class="card-title"><b>Género:</b> {{ libro.genero }}</h5>
-                <button class="btn btn-primary" @click="seleccionar(id)" href=""> PEDIR </button>
+                <button class="btn btn-primary" href=""> PEDIR </button> <!--crearpeticion-->
             </div>
 
         </div>

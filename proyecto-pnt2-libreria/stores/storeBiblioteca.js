@@ -64,7 +64,7 @@ export const useStoreBiblioteca = defineStore("biblioteca", {
 		seleccionar(index) {
 			this.libroSeleccionado = this.libros[index];
 		},
-		ObtenerLibro() {
+		ObtenerLibros() {
 			//Arma el link con la pagina
 			fetch(url)
 				.then((response) => {
@@ -83,3 +83,4 @@ export const useStoreBiblioteca = defineStore("biblioteca", {
 		},
 	},
 });
+

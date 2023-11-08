@@ -2,7 +2,27 @@
     Crear un libro y mandarlo a la API de mis libros para  aptos prestar
     Tener un boton para dar de baja uno de mis libros en la API
 -->
+
 <script setup>
+import {ref} from 'vue'
+const libros = ref([])
+const ObtenerLibros = () => {
+    //Arma el link con la pagina
+    fetch(url)
+        .then((response) => {
+            if (response.status === 200) {
+                return response.json(); // Convierte la respuesta a JSON
+            } else {
+                throw new Error("No se pudo obtener la información");
+            }
+        })
+        .then((data) => {
+            this.libros.value = data.results; //Obtengo el results que es donde esta mi vector que quiero trabajar
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
 
 </script>
 
@@ -10,7 +30,24 @@
     <div class="margen">
 
         <a href="./RegistroLibro">Registrar Libro Nuevo</a>
-
+        <div class="row">
+            <div class="col-8 contenedor">
+                <div v-for="(libro, id) in libros">
+                    <div class="card" style="width: 30rem;">
+                        <div class="card-body">
+                            <img :src=libro.img class="card-img-top" alt="...">
+                            <div class="container-carta">
+                                <h5 class="card-title"><b>Titulo:</b> {{ libro.titulo }}</h5>
+                                <h5 class="card-title"><b>Descripción:</b> {{ libro.descripcion }}</h5>
+                                <h5 class="card-title"><b>Autor:</b> {{ libro.autor }}</h5>
+                                <h5 class="card-title"><b>Género:</b> {{ libro.genero }}</h5>
+                                <i class='bx bx-x bx-md bx-tada-hover' ></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -34,5 +71,14 @@ a:hover {
 
 .margen {
     margin: 20px 0px 0px 20px;
+}
+.bx-md{
+    position: absolute;
+    top:0 ;
+    right: 0;
+
+}
+.bx-md:hover{
+    color: red;
 }
 </style>

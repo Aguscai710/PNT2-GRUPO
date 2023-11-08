@@ -1,7 +1,9 @@
 <!--
-   1) Con el boton "Aceptar" hacemos el intercambio(eliminamos los libros de los usuatios en la API) y mostramos un pop up con los datos del usuario 
+   1) Con el boton "Aceptar" hacemos el intercambio(eliminamos los libros de los usuatios en la API) 
+   y mostramos un pop up con los datos del usuario 
    2)Elimina la peticion del otro usuario y elimina la confirmacion mia en la API
 -->
+
 <script setup>
 import { ref } from 'vue'
 
@@ -32,8 +34,12 @@ let peticion5 = {
 }
 
 let peticiones = ref([
-    peticion1, peticion2, peticion3,peticion4,peticion5
+    peticion1, peticion2, peticion3, peticion4, peticion5
 ])
+
+const intercambiar = () =>{
+
+}
 
 </script>
 
@@ -52,7 +58,7 @@ let peticiones = ref([
                     </select>
                     <br>
                     <br>
-                    <button class="btn btn-success" @click="seleccionar(id)" href=""> ACEPTAR </button>
+                    <button class="btn btn-success" @click="intercambiar(index, peticion.libro1)" href=""> ACEPTAR </button>
                     <button class="btn btn-danger" @click="seleccionar(id)" href=""> RECHAZAR </button>
                 </div>
             </div>

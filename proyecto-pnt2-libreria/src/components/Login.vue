@@ -1,9 +1,37 @@
 <!--
     Validar que el usuario exista para que pueda ingresar(en la API)
 -->
+
 <script setup>
     import {ref} from 'vue'
-
+    const usuarios = ref([])
+    const mensajeError = "El mail o contraseña son incorrectos"
+    const ObtenerUsuarios = () => {
+			//Arma el link con la pagina
+			fetch(url)
+				.then((response) => {
+					if (response.status === 200) {
+						return response.json(); // Convierte la respuesta a JSON
+					} else {
+						throw new Error("No se pudo obtener la información");
+					}
+				})
+				.then((data) => {
+					this.usuarios.value = data.results; //Obtengo el results que es donde esta mi vector que quiero trabajar
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+	}
+    const validarUsuario = (email, contraseña) => {
+        ObtenerUsuarios()
+        const usuarioEncontrado = usuarios.find(p=>p.email==email && p.contraseña==contraseña)
+        if (usuarioEncontrado!=null){
+            //loguearse
+        } else {
+            mensajeError //mostrar por pantalla?
+        }
+    }
 </script>
 
 <template>
@@ -18,7 +46,7 @@
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" class="form-control" id="exampleInputPassword1">
                 </div>
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success" @click="validarUsuario()">Submit</button>
             </form>
         </div>
     </div>

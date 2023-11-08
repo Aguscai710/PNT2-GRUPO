@@ -1,7 +1,8 @@
 <!--
-1)Traer los libros de mi usuario a Biblioteca desde la API
+1)Traer los libros de todos los usuarios menos los mios  a Biblioteca desde la API
 2)Con el boto "pedir" crear una peticion y mandarla a la API
 -->
+
 
 <script setup>
 import Libro from './Libro.vue'

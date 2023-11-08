@@ -2,6 +2,7 @@
     Las peticiones son creadas desde el boton "pedir" de biblioteca
     Las podemos dar de baja en la API
 -->
+
 <script setup>
 import { ref } from 'vue'
 
@@ -24,6 +25,8 @@ let peticion3 = {
 let peticiones = ref([
     peticion1, peticion2, peticion3
 ])
+
+
 
 </script>
 
