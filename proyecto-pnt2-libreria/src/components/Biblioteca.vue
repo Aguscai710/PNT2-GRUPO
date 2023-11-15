@@ -6,11 +6,15 @@
 
 <script setup>
 import Libro from './Libro.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useStoreBiblioteca } from '../../stores/storeBiblioteca';
 
 const store = useStoreBiblioteca()
 
+onMounted(()=>{
+    const intervalo = setInterval(store.ObtenerLibros,1000)
+    store.ObtenerLibros()
+})
 </script>
 
 <template>

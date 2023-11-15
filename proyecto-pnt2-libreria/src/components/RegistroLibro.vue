@@ -1,15 +1,24 @@
 <script setup>
-import { ref } from 'vue';
 
-const libros = ref([])
-const ActualizarLibros = () => {
+
+const libroNuevo = {
+    titulo:'',
+    genero:'',
+    autor:'',
+    descripcion:''
+
+}
+const url ="https://65541b4963cafc694fe6268f.mockapi.io/booke/1"
+const crearLibro = () => {
+
+alert(libroNuevo.autor)
     fetch(url, {
-        method: 'POST',
+        method: 'PUT',
         headers: {'content-type':'application/json'},
-        body: JSON.stringify({Libro: libro})
+        body: JSON.stringify({libroNuevo})
         }).then(res => {
   if (res.ok) {
-      return res.json();
+    return res.json();
   }
   // handle error
 }).then(task => {
@@ -17,46 +26,35 @@ const ActualizarLibros = () => {
 }).catch(error => {
   // handle error
 })
+
+
 }
 
-const crearLibro = () => {
-    let titulo = document.getElementById("titulo").value
-    let descripcion = document.getElementById("descripcion").value
-    let genero = document.getElementById("genero").value
-    let autor = document.getElementById("autor").value
 
-    const libro = {
-        titulo : titulo,
-        descripcion : descripcion,
-        genero: genero,
-        autor : autor
-    }
-    libros.push(libro)
-    ActualizarLibros()
-}
+
 </script>
 
 <template>
     <div class="margen">
         <h3>Publicá un nuevo libro</h3>
-        <form @submit="crearLibro()">
+        <form >
             <div class="mb-3">
                 <label for="titulo" class="form-label">Titulo</label>
-                <input type="email" class="form-control" id="titulo" aria-describedby="emailHelp">
+                <input v-model="libroNuevo.titulo" type="text" class="form-control" id="titulo" required >
             </div>
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripcion</label>
-                <input type="password" class="form-control" id="descripcion">
+                <input v-model="libroNuevo.descripcion" type="text" class="form-control" id="descripcion" required>
             </div>
             <div class="mb-3">
                 <label for="autor" class="form-label">Autor</label>
-                <input type="password" class="form-control" id="autor">
+                <input v-model="libroNuevo.autor" type="text" class="form-control" id="autor" required>
             </div>
             <div class="mb-3">
                 <label for="genero" class="form-label">Genero</label>
-                <input type="password" class="form-control" id="genero">
+                <input v-model="libroNuevo.genero" type="text" class="form-control" id="genero" required>
             </div>
-            <button type="submit" class="btn btn-success"> PUBLICAR </button>
+            <button type="submit" class="btn btn-success" @click="crearLibro"> PUBLICAR </button>
         </form>
     </div>
 </template>

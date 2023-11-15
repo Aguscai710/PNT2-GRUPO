@@ -39,7 +39,7 @@ const crearPeticion = () => {
                 <h5 class="card-title"><b>Descripción:</b> {{ libro.descripcion }}</h5>
                 <h5 class="card-title"><b>Autor:</b> {{ libro.autor }}</h5>
                 <h5 class="card-title"><b>Género:</b> {{ libro.genero }}</h5>
-                <button class="btn btn-primary" href=""> PEDIR </button> <!--crearpeticion-->
+                <button class="btn btn-primary" @click="crearPeticion"> PEDIR </button> <!--crearpeticion-->
             </div>
 
         </div>

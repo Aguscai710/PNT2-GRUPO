@@ -6,32 +6,18 @@
 import {ref} from 'vue'
 const usuarios = ref([])
 
-// const usuarioNuevo = {
-//         email: "",
-//         contraseña: "",
-//         telefono: "",
-//         usuario: ""
-//     }
+const usuarioNuevo = {
+        email: "",
+        contraseña: "",
+        contraseñaConfirmada: "",
+        telefono: "",
+        usuario: ""
+    }
 
 
 const crearUsuario = () => { 
-    let email = document.getElementById("email").value
-    let contraseña = document.getElementById("contraseña").value
-    let telefono = document.getElementById("telefono").value
-    let usuario = document.getElementById("usuario").value
-    let contraseñaConf = document.getElementById("contraseñaConf").value
 
-    const usuarioNuevo = {
-        email: email,
-        contraseña: contraseña,
-        telefono: telefono,
-        usuario: usuario
-    }
-
-    ObtenerUsuarios()
-    const emailExists = usuarios.find(p => p.email == email)
-    const usuarioExists = usuarios.find(p => p.email == email)
-// if (emailExists == null && usuarioExists == null && contraseña == contraseñaConf) {
+     if ( usuarioNuevo.contraseña == usuarioNuevo.contraseñaConfirmada ) {
         fetch("https://654add315b38a59f28ee50e5.mockapi.io/Usuarios",{
             method: 'POST',
             headers: { 'content-type': 'application/json' },
@@ -46,9 +32,10 @@ const crearUsuario = () => {
         }).catch(error => {
             // handle error
         })
-        console.log(email.value)
+        alert("Registro exitoso!")
+    
+        }
     }
-//  }
 const ObtenerUsuarios = () => {
     //Arma el link con la pagina
     fetch("https://654add315b38a59f28ee50e5.mockapi.io/Usuarios")
@@ -67,6 +54,7 @@ const ObtenerUsuarios = () => {
         });
 }
 
+
 </script>
 
 <template>
@@ -74,25 +62,25 @@ const ObtenerUsuarios = () => {
         <form>
             <div class="mb-3">
                 <label for="usuario" class="form-label">Nombre de usuario</label>
-                <input type="text" class="form-control" id="usuario">
+                <input v-model="usuarioNuevo.usuario" type="text" class="form-control" id="usuario" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                <input v-model="usuarioNuevo.email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
                 <label for="contraseña" class="form-label">Password</label>
-                <input type="password" class="form-control" id="contraseña">
+                <input v-model="usuarioNuevo.contraseña" type="password" class="form-control" id="contraseña" required>
             </div>
             <div class="mb-3">
                 <label for="contraseñaConf" class="form-label">Confirmar Password</label>
-                <input type="password" class="form-control" id="contraseñaConf">
+                <input v-model="usuarioNuevo.contraseñaConfirmada" type="password" class="form-control" id="contraseñaConf" required>
             </div>
             <div class="mb-3">
                 <label for="Telefono" class="form-label">Telefono</label>
-                <input type="number" class="form-control" id="Telefono">
+                <input v-model="usuarioNuevo.telefono" type="number" class="form-control" id="Telefono" required>
             </div>
-            <button type="submit" class="btn btn-success" @click="crearUsuario()">Submit</button>
+            <button type="submit" class="btn btn-success" @click="crearUsuario" >Submit</button>
         </form>
     </div>
 </template>

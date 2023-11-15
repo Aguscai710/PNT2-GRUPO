@@ -3,12 +3,16 @@
 -->
 
 <script setup>
-    import {ref} from 'vue'
+    import {ref,onMounted} from 'vue'
     const usuarios = ref([])
-    const mensajeError = "El mail o contraseña son incorrectos"
+
+    const usuarioRegistrado={
+        mail:'',
+        contraseña:''
+    }
     const ObtenerUsuarios = () => {
 			//Arma el link con la pagina
-			fetch(url)
+			fetch("https://654add315b38a59f28ee50e5.mockapi.io/Usuarios")
 				.then((response) => {
 					if (response.status === 200) {
 						return response.json(); // Convierte la respuesta a JSON
@@ -23,15 +27,13 @@
 					console.error(error);
 				});
 	}
-    const validarUsuario = (email, contraseña) => {
-        ObtenerUsuarios()
-        const usuarioEncontrado = usuarios.find(p=>p.email==email && p.contraseña==contraseña)
-        if (usuarioEncontrado!=null){
-            //loguearse
-        } else {
-            mensajeError //mostrar por pantalla?
-        }
-    }
+
+
+
+    onMounted(()=>{
+    const intervalo = setInterval(ObtenerUsuarios,1000)
+    ObtenerUsuarios()
+})
 </script>
 
 <template>
@@ -40,11 +42,11 @@
             <form>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input v-model="usuarioRegistrado.mail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input v-model="usuarioRegistrado.contraseña" type="password" class="form-control" id="exampleInputPassword1" required>
                 </div>
                 <button type="submit" class="btn btn-success" @click="validarUsuario()">Submit</button>
             </form>

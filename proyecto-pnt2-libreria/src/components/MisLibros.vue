@@ -4,11 +4,11 @@
 -->
 
 <script setup>
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 const libros = ref([])
 const ObtenerLibros = () => {
     //Arma el link con la pagina
-    fetch(url)
+    fetch("https://654add315b38a59f28ee50e5.mockapi.io/Usuarios")
         .then((response) => {
             if (response.status === 200) {
                 return response.json(); // Convierte la respuesta a JSON
@@ -24,6 +24,10 @@ const ObtenerLibros = () => {
         });
 }
 
+onMounted(()=>{
+    const intervalo = setInterval(ObtenerLibros,1000)
+    ObtenerLibros()
+})
 </script>
 
 <template>
