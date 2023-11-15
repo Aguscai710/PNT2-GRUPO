@@ -18,10 +18,10 @@ const usuarioNuevo = {
 const crearUsuario = () => { 
 
      if ( usuarioNuevo.contraseña == usuarioNuevo.contraseñaConfirmada ) {
-        fetch("https://654add315b38a59f28ee50e5.mockapi.io/Usuarios",{
+        fetch("https://65541db063cafc694fe62740.mockapi.io/lib",{
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ usuario: usuarioNuevo })
+            body: JSON.stringify({usuarioNuevo })
         }).then(res => {
             if (res.ok) {
                 return res.json();
@@ -33,7 +33,6 @@ const crearUsuario = () => {
             // handle error
         })
         alert("Registro exitoso!")
-    
         }
     }
 const ObtenerUsuarios = () => {
@@ -80,7 +79,7 @@ const ObtenerUsuarios = () => {
                 <label for="Telefono" class="form-label">Telefono</label>
                 <input v-model="usuarioNuevo.telefono" type="number" class="form-control" id="Telefono" required>
             </div>
-            <button type="submit" class="btn btn-success" @click="crearUsuario" >Submit</button>
+            <button class="btn btn-success" @click="crearUsuario" >Submit</button>
         </form>
     </div>
 </template>

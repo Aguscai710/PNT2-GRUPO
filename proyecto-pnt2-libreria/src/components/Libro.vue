@@ -11,10 +11,10 @@ const crearPeticion = () => {
         usuario : props.libro.usuario, //ver como guardar la variable usuario para usarla en todos lados
         estado : "en espera"
     }
-    fetch(url, {
-        method: 'PUT', // or PATCH
+    fetch("https://65541db063cafc694fe62740.mockapi.io/lib", {
+        method: 'POST', // or PATCH
         headers: {'content-type':'application/json'},
-        body: JSON.stringify({Peticion: peticion})
+        body: JSON.stringify({peticion})
         }).then(res => {
   if (res.ok) {
       return res.json();
@@ -25,7 +25,7 @@ const crearPeticion = () => {
 }).catch(error => {
   // handle error
 })
-
+alert("Peticion Creada!")
 }
 
 </script>

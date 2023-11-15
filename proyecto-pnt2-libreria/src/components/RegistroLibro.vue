@@ -8,26 +8,24 @@ const libroNuevo = {
     descripcion:''
 
 }
-const url ="https://65541b4963cafc694fe6268f.mockapi.io/booke/1"
-const crearLibro = () => {
 
-alert(libroNuevo.autor)
-    fetch(url, {
-        method: 'PUT',
-        headers: {'content-type':'application/json'},
-        body: JSON.stringify({libroNuevo})
-        }).then(res => {
+const crearLibro = () => {
+    fetch("https://65541db063cafc694fe62740.mockapi.io/lib", {
+  method: 'POST',
+  headers: {'content-type':'application/json'},
+  // Send your data in the request body as JSON
+  body: JSON.stringify(libroNuevo)
+}).then(res => {
   if (res.ok) {
-    return res.json();
+      return res.json();
   }
   // handle error
 }).then(task => {
-  // Do something with updated task
+  // do something with the new task
 }).catch(error => {
   // handle error
 })
-
-
+alert("enviado!")
 }
 
 
@@ -37,7 +35,7 @@ alert(libroNuevo.autor)
 <template>
     <div class="margen">
         <h3>Publicá un nuevo libro</h3>
-        <form >
+        <form>
             <div class="mb-3">
                 <label for="titulo" class="form-label">Titulo</label>
                 <input v-model="libroNuevo.titulo" type="text" class="form-control" id="titulo" required >
@@ -54,7 +52,7 @@ alert(libroNuevo.autor)
                 <label for="genero" class="form-label">Genero</label>
                 <input v-model="libroNuevo.genero" type="text" class="form-control" id="genero" required>
             </div>
-            <button type="submit" class="btn btn-success" @click="crearLibro"> PUBLICAR </button>
+            <button type="submit" class="btn btn-success" @click="crearLibro" > PUBLICAR </button>
         </form>
     </div>
 </template>
