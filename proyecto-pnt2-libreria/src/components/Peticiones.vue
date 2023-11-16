@@ -6,26 +6,7 @@
 <script setup>
 import { ref } from 'vue'
 
-let peticion1 = {
-    libro1: "hola",
-    usuario: "juan",
-    estado: "aprobado"
-}
-let peticion2 = {
-    libro1: "gsg",
-    usuario: "jorge",
-    estado: "rechazado"
-}
-let peticion3 = {
-    libro1: "wtgt",
-    usuario: "carlos",
-    estado: "en espera"
-}
-
-let peticiones = ref([
-    peticion1, peticion2, peticion3
-])
-
+//HACER FETCH PARA TRAER LAS PETICIONES DE LA API
 
 
 </script>

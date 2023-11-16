@@ -1,8 +1,10 @@
 import {defineStore} from 'pinia'
+import { ref } from "vue";
 
 export const useStoreBiblioteca = defineStore("biblioteca", {
 	state: () => ({
 		libroSeleccionado: null,
+		libros: ref([])
 	}),
 	getters: {
 		getLibros(state) {
@@ -15,19 +17,24 @@ export const useStoreBiblioteca = defineStore("biblioteca", {
 		},
 		ObtenerLibros() {
 			//Arma el link con la pagina
-			fetch("https://654add315b38a59f28ee50e5.mockapi.io/Usuarios")
-				.then((response) => {
-					if (response.status === 200) {
-						return response.json(); // Convierte la respuesta a JSON
-					} else {
-						throw new Error("No se pudo obtener la información");
+			fetch("http://localhost:8080/api/libro", {
+				method: "GET",
+				headers: { "content-type": "application/json" },
+			})
+				.then((res) => {
+					if (res.ok) {
+						return res.json();
 					}
+					// handle error
 				})
 				.then((data) => {
-					this.libros.value = data.results; //Obtengo el results que es donde esta mi vector que quiero trabajar
+					this.libros = data;
+				})
+				.then((tasks) => {
+					// Do something with the list of tasks
 				})
 				.catch((error) => {
-					console.error(error);
+					// handle error
 				});
 		},
 	},

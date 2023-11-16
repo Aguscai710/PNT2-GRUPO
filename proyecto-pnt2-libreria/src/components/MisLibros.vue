@@ -8,7 +8,7 @@ import {onMounted, ref} from 'vue'
 const libros = ref([])
 const ObtenerLibros = () => {
     //Arma el link con la pagina
-    fetch("https://654add315b38a59f28ee50e5.mockapi.io/Usuarios")
+    fetch("http://localhost:8080/api/libro")//Falta filtrar libros x usuario
         .then((response) => {
             if (response.status === 200) {
                 return response.json(); // Convierte la respuesta a JSON

@@ -16,12 +16,18 @@ const usuarioNuevo = {
 
 
 const crearUsuario = () => { 
+    const usuario = {
+        nombre: usuarioNuevo.usuario,
+        password:usuarioNuevo.contraseña ,
+        mail: usuarioNuevo.email,
+        telefono: usuarioNuevo.telefono
+    }
 
      if ( usuarioNuevo.contraseña == usuarioNuevo.contraseñaConfirmada ) {
-        fetch("https://65541db063cafc694fe62740.mockapi.io/lib",{
+        fetch("http://localhost:8080/api/usuario",{
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({usuarioNuevo })
+            body: JSON.stringify(usuario)
         }).then(res => {
             if (res.ok) {
                 return res.json();

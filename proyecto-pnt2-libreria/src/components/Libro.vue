@@ -6,12 +6,8 @@ const props = defineProps({
 })
 
 const crearPeticion = () => {
-    const peticion = {
-        id : props.libro.id,
-        usuario : props.libro.usuario, //ver como guardar la variable usuario para usarla en todos lados
-        estado : "en espera"
-    }
-    fetch("https://65541db063cafc694fe62740.mockapi.io/lib", {
+//Crear peticion y mandarla
+    fetch("http://localhost:8080/api/peticion", {
         method: 'POST', // or PATCH
         headers: {'content-type':'application/json'},
         body: JSON.stringify({peticion})

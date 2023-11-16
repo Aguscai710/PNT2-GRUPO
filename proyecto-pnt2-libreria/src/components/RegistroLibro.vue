@@ -5,12 +5,13 @@ const libroNuevo = {
     titulo:'',
     genero:'',
     autor:'',
-    descripcion:''
+    descripcion:'',
+    usuarioid:'3'
 
 }
 
 const crearLibro = () => {
-    fetch("https://65541db063cafc694fe62740.mockapi.io/lib", {
+    fetch("http://localhost:8080/api/libro", {
   method: 'POST',
   headers: {'content-type':'application/json'},
   // Send your data in the request body as JSON
