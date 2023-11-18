@@ -8,6 +8,7 @@
 import Libro from './Libro.vue'
 import { ref, onMounted } from 'vue'
 import { useStoreBiblioteca } from '../../stores/storeBiblioteca';
+import Confirmacion from './Confirmacion.vue';
 
 const store = useStoreBiblioteca()
 
@@ -22,7 +23,7 @@ onMounted(()=>{
         <div class="col-8 contenedor">
             <div v-for="(libro, id) in store.getLibros">
                 <div class="card" style="width: 18rem; ">
-                    <img :src=libro.img class="card-img-top" alt="...">
+                    <img :src=libro.imagen class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"> {{ libro.titulo }}</h5>
                         <button class="btn btn-success" @click="store.seleccionar(id)" href="">VER LIBRO</button>

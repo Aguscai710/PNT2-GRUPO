@@ -4,49 +4,26 @@
 
 <script setup>
     import {ref,onMounted} from 'vue'
-    const usuarios = ref([])
+    import { useStoreLogin } from '../../stores/storeLogin.js';
 
-    const usuarioRegistrado={
-        mail:'',
-        contraseña:''
-    }
-    const ObtenerUsuarios = () => {
-			//Arma el link con la pagina
-			fetch("https://654add315b38a59f28ee50e5.mockapi.io/Usuarios")
-				.then((response) => {
-					if (response.status === 200) {
-						return response.json(); // Convierte la respuesta a JSON
-					} else {
-						throw new Error("No se pudo obtener la información");
-					}
-				})
-				.then((data) => {
-					this.usuarios.value = data.results; //Obtengo el results que es donde esta mi vector que quiero trabajar
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-	}
+    const store = useStoreLogin()
 
 
-
-    onMounted(()=>{
-    const intervalo = setInterval(ObtenerUsuarios,1000)
-    ObtenerUsuarios()
-})
 </script>
 
 <template>
+
+    {{ store.usuarioLogueado }}
     <div class="background">
         <div class="margen">
             <form>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input v-model="usuarioRegistrado.mail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                    <input v-model="store.usuarioRegistrado.mail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input v-model="usuarioRegistrado.contraseña" type="password" class="form-control" id="exampleInputPassword1" required>
+                    <input v-model="store.usuarioRegistrado.contraseña" type="password" class="form-control" id="exampleInputPassword1" required>
                 </div>
                 <button type="submit" class="btn btn-success" @click="validarUsuario()">Submit</button>
             </form>

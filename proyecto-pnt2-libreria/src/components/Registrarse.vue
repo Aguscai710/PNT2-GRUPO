@@ -8,7 +8,7 @@ const usuarios = ref([])
 
 const usuarioNuevo = {
         email: "",
-        contraseña: "",
+        password: "",
         contraseñaConfirmada: "",
         telefono: "",
         usuario: ""
@@ -18,12 +18,12 @@ const usuarioNuevo = {
 const crearUsuario = () => { 
     const usuario = {
         nombre: usuarioNuevo.usuario,
-        password:usuarioNuevo.contraseña ,
+        password:usuarioNuevo.password ,
         mail: usuarioNuevo.email,
         telefono: usuarioNuevo.telefono
     }
 
-     if ( usuarioNuevo.contraseña == usuarioNuevo.contraseñaConfirmada ) {
+     if ( usuarioNuevo.password == usuarioNuevo.contraseñaConfirmada ) {
         fetch("http://localhost:8080/api/usuario",{
             method: 'POST',
             headers: { 'content-type': 'application/json' },

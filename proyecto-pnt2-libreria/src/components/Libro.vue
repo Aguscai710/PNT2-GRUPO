@@ -29,7 +29,7 @@ alert("Peticion Creada!")
 <template>
     <div class="card" style="width: 30rem;">
         <div class="card-body">
-            <img :src=props.libro.img class="card-img-top" alt="...">
+            <img :src=props.libro.imagen class="card-img-top" alt="...">
             <div class="container-carta">
                 <h5 class="card-title"><b>Titulo:</b> {{ libro.titulo }}</h5>
                 <h5 class="card-title"><b>Descripción:</b> {{ libro.descripcion }}</h5>

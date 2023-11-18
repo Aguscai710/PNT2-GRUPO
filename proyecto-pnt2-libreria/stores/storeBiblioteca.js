@@ -28,7 +28,7 @@ export const useStoreBiblioteca = defineStore("biblioteca", {
 					// handle error
 				})
 				.then((data) => {
-					this.libros = data;
+					this.libros = data.data;
 				})
 				.then((tasks) => {
 					// Do something with the list of tasks

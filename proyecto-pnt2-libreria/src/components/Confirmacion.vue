@@ -5,57 +5,52 @@
 -->
 
 <script setup>
-import { ref } from 'vue'
+import { ref , onMounted} from 'vue'
 
-let peticion1 = {
-    usuario: "juan",
-    libro1: "hola",
-    libro2: ["asda", "fsffdsg", "fasf"]
-}
-let peticion2 = {
-    usuario: "carlos",
-    libro1: "gsg",
-    libro2: ["asda", "fsffdsg", "fasf"]
-}
-let peticion3 = {
-    usuario: "pedro",
-    libro1: "wtgt",
-    libro2: ["asda", "fsffdsg", "fasf"]
-}
-let peticion4 = {
-    usuario: "pedro",
-    libro1: "wtgt",
-    libro2: ["asda", "fsffdsg", "fasf"]
-}
-let peticion5 = {
-    usuario: "pedro",
-    libro1: "wtgt",
-    libro2: ["asda", "fsffdsg", "fasf"]
-}
 
-let peticiones = ref([
-    peticion1, peticion2, peticion3, peticion4, peticion5
-])
+const confirmaciones = ref([])
 
-const intercambiar = () =>{
+const ObtenerConfirmaciones=()=> {
+			//Arma el link con la pagina
+			fetch("http://localhost:8080/api/confirmacion", {
+				method: "GET",
+				headers: { "content-type": "application/json" },
+			})
+				.then((res) => {
+					if (res.ok) {
+						return res.json();
+					}
+					// handle error
+				})
+				.then((data) => {
+					this.confirmaciones = data.data;
+				})
+				.then((tasks) => {
+					// Do something with the list of tasks
+				})
+				.catch((error) => {
+					// handle error
+				});
+		}
+        
 
-}
 
+
+onMounted(()=>{
+    ObtenerConfirmaciones()
+})
 </script>
 
 <template>
     <div class="margen">
 
         <div class="row">
-            <div v-for="peticion in peticiones" class="card" style="width: 30rem;">
+            <div v-for="confirmacion in confirmaciones" class="card" style="width: 30rem;">
             <div class="card-body">
                 <div class="container-carta">
-                    <h5 class="card-title"><b>El usuario:</b> {{ peticion.usuario }}</h5>
-                    <h5 class="card-title"><b>Quiere tu libro:</b> {{ peticion.libro1 }}</h5>
-                    <select>
-                        <option value="" disabled selected>Selecciona un libro de {{ peticion.usuario }} para intercambiar</option>
-                        <option v-for="(libro, index) in peticion.libro2" :key="index">{{ libro }}</option>
-                    </select>
+                    <h5 class="card-title"><b>El usuario:</b> {{ confirmacion.usuario.nombre }}</h5>
+                    <h5 class="card-title"><b>Quiere tu libro:</b> {{ confirmacion.libro.titulo }}</h5>
+                    <h5> <b>Por un tiempo de :{{ confirmacion.descripcion }} </b></h5>
                     <br>
                     <br>
                     <button class="btn btn-success" @click="intercambiar(index, peticion.libro1)" href=""> ACEPTAR </button>

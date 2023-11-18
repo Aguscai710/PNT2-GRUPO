@@ -4,11 +4,37 @@
 -->
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
-//HACER FETCH PARA TRAER LAS PETICIONES DE LA API
+const peticiones = ref([])
+
+const ObtenerPeticiones=()=> {
+			//Arma el link con la pagina
+			fetch("http://localhost:8080/api/peticion", {
+				method: "GET",
+				headers: { "content-type": "application/json" },
+			})
+				.then((res) => {
+					if (res.ok) {
+						return res.json();
+					}
+					// handle error
+				})
+				.then((data) => {
+					this.peticiones = data.data;
+				})
+				.then((tasks) => {
+					// Do something with the list of tasks
+				})
+				.catch((error) => {
+					// handle error
+				});
+		}
 
 
+onMounted(()=>{
+    ObtenerPeticiones()
+})
 </script>
 
 <template>

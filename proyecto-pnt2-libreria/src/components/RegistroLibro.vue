@@ -6,7 +6,8 @@ const libroNuevo = {
     genero:'',
     autor:'',
     descripcion:'',
-    usuarioid:'3'
+    imagen:''
+
 
 }
 
@@ -53,6 +54,10 @@ alert("enviado!")
                 <label for="genero" class="form-label">Genero</label>
                 <input v-model="libroNuevo.genero" type="text" class="form-control" id="genero" required>
             </div>
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input v-model="libroNuevo.imagen" type="text" class="form-control" id="imagen" required>
+            </div>
             <button type="submit" class="btn btn-success" @click="crearLibro" > PUBLICAR </button>
         </form>
     </div>
@@ -69,7 +74,7 @@ alert("enviado!")
     flex-direction: column;
     margin-top: 160px;
     width: 800px;
-    height: 500px;
+    height: 599px;
     padding: 10px;
     border-radius: 2%;
     box-shadow: 8px 4px 6px black;
