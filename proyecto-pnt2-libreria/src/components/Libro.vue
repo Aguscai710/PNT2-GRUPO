@@ -1,8 +1,6 @@
 <script setup>
 const props = defineProps({
     libro: 0
-
-
 })
 
 const crearPeticion = () => {

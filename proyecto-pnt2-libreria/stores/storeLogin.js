@@ -10,6 +10,7 @@ export const useStoreLogin = defineStore("login", {
 			password: "",
 		},
 		usuarios: ref([]),
+		estaEsunavariableaborrar:12,
 	}),
 	getters: {
 		getUsuarios(state) {
