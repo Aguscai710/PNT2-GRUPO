@@ -9,8 +9,8 @@ import Libro from './Libro.vue'
 import { ref, onMounted } from 'vue'
 import { useStoreBiblioteca } from '../../stores/storeBiblioteca';
 import Confirmacion from './Confirmacion.vue';
-
 const store = useStoreBiblioteca()
+
 
 onMounted(()=>{
     store.ObtenerLibros()
@@ -18,7 +18,6 @@ onMounted(()=>{
 </script>
 
 <template>
-    {{ store.libros }}
     <div class="row">
         <div class="col-8 contenedor">
             <div v-for="(libro, id) in store.getLibros">

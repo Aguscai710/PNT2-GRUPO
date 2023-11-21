@@ -1,6 +1,3 @@
-<!--
-    Validar que el usuario exista para que pueda ingresar(en la API)
--->
 
 <script setup>
     import {ref,onMounted} from 'vue'
@@ -18,14 +15,14 @@
         <div class="margen">
             <form>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input v-model="store.usuarioRegistrado.mail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                    <label for="mail" class="form-label">Email address</label>
+                    <input v-model="store.usuarioRegistrado.mail" type="email" class="form-control" id="mail" aria-describedby="emailHelp" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input v-model="store.usuarioRegistrado.contraseña" type="password" class="form-control" id="exampleInputPassword1" required>
+                    <label for="password" class="form-label">Password</label>
+                    <input v-model="store.usuarioRegistrado.password" type="password" class="form-control" id="password" required>
                 </div>
-                <button type="submit" class="btn btn-success" @click="validarUsuario()">Submit</button>
+                <button class="btn btn-success" @click="store.LoguearUsuario()">Submit</button>
             </form>
         </div>
     </div>

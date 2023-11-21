@@ -6,10 +6,50 @@
 
 <script setup>
 import { ref , onMounted} from 'vue'
+import { useStoreLogin } from '../../stores/storeLogin.js';
 
+const store = useStoreLogin()
 
 const confirmaciones = ref([])
 
+const aceptarConfirmacion = (id) => {
+    fetch(`http://localhost:8080/api/confirmacion/${id}`, {
+				method: "DELETE",
+				headers: { "content-type": "application/json" },
+			})
+				.then((res) => {
+					if (res.ok) {
+						return res.json();
+					}
+					// handle error
+				})
+				.then((tasks) => {
+					// Do something with the list of tasks
+				})
+				.catch((error) => {
+					// handle error
+				});
+}
+
+const rechazarConfirmacion = (id) => {
+//Arma el link con la pagina
+    fetch(`http://localhost:8080/api/confirmacion/${id}`, {
+				method: "DELETE",
+				headers: { "content-type": "application/json" },
+			})
+				.then((res) => {
+					if (res.ok) {
+						return res.json();
+					}
+					// handle error
+				})
+				.then((tasks) => {
+					// Do something with the list of tasks
+				})
+				.catch((error) => {
+					// handle error
+				});
+}
 const ObtenerConfirmaciones=()=> {
 			//Arma el link con la pagina
 			fetch("http://localhost:8080/api/confirmacion", {
@@ -23,7 +63,7 @@ const ObtenerConfirmaciones=()=> {
 					// handle error
 				})
 				.then((data) => {
-					this.confirmaciones = data.data;
+					confirmaciones.value = data.data; //foreach y poner solo las del usuario logueado
 				})
 				.then((tasks) => {
 					// Do something with the list of tasks
@@ -48,13 +88,13 @@ onMounted(()=>{
             <div v-for="confirmacion in confirmaciones" class="card" style="width: 30rem;">
             <div class="card-body">
                 <div class="container-carta">
-                    <h5 class="card-title"><b>El usuario:</b> {{ confirmacion.usuario.nombre }}</h5>
-                    <h5 class="card-title"><b>Quiere tu libro:</b> {{ confirmacion.libro.titulo }}</h5>
-                    <h5> <b>Por un tiempo de :{{ confirmacion.descripcion }} </b></h5>
+                    <h5 class="card-title"><b>El usuario:</b> {{ confirmacion.Usuario.nombre }}</h5>
+                    <h5 class="card-title"><b>Quiere tu libro:</b> {{ confirmacion.Libro.titulo }}</h5>
+                    <h5> <b>Por un tiempo de : {{ confirmacion.descripcion }} </b></h5>
                     <br>
                     <br>
-                    <button class="btn btn-success" @click="intercambiar(index, peticion.libro1)" href=""> ACEPTAR </button>
-                    <button class="btn btn-danger" @click="seleccionar(id)" href=""> RECHAZAR </button>
+                    <button class="btn btn-success" @click="aceptarConfirmacion(confirmacion.id)" href=""> ACEPTAR </button>
+                    <button class="btn btn-danger" @click="rechazarConfirmacion(confirmacion.id)" href=""> RECHAZAR </button>
                 </div>
             </div>
         </div>

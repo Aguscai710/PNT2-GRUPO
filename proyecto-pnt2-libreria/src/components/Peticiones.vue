@@ -5,8 +5,30 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useStoreLogin } from '../../stores/storeLogin.js';
+
+const store = useStoreLogin()
 
 const peticiones = ref([])
+
+const borrarPeticion=(id)=>{
+    fetch(`http://localhost:8080/api/peticion/${id}`, {
+				method: "DELETE",
+				headers: { "content-type": "application/json" },
+			})
+				.then((res) => {
+					if (res.ok) {
+						return res.json();
+					}
+					// handle error
+				})
+				.then((tasks) => {
+					// Do something with the list of tasks
+				})
+				.catch((error) => {
+					// handle error
+				});
+}
 
 const ObtenerPeticiones=()=> {
 			//Arma el link con la pagina
@@ -21,7 +43,7 @@ const ObtenerPeticiones=()=> {
 					// handle error
 				})
 				.then((data) => {
-					this.peticiones = data.data;
+					peticiones.value = data.data; //foreach y poner solo las del usuario logueado
 				})
 				.then((tasks) => {
 					// Do something with the list of tasks
@@ -43,11 +65,11 @@ onMounted(()=>{
         <div v-for="peticion in peticiones" class="card" style="width: 30rem;">
             <div class="card-body">
                 <div class="container-carta">
-                    <h5 class="card-title"><b>Solicitaste el libro: </b> {{ peticion.libro1 }}</h5>
-                    <h5 class="card-title"><b>Al usuario: </b> {{ peticion.usuario }}</h5>
-                    <h5 class="card-title"><b>Estado de la solicitud: </b> {{ peticion.estado }}</h5>
+                    <h5 class="card-title"><b>Solicitaste el libro: </b> {{ peticion.Libro.titulo }}</h5>
+                    <h5 class="card-title"><b>Al usuario: </b> {{ peticion.Usuario.nombre }}</h5>
+                    <h5 class="card-title"><b>Estado de la solicitud: </b> {{ peticion.descripcion }}</h5>
                 </div>
-                <i class='bx bx-x bx-md bx-tada-hover' ></i>
+                <i @click="borrarPeticion(peticion.id)" class='bx bx-x bx-md bx-tada-hover' ></i>
             </div>
 
         </div>

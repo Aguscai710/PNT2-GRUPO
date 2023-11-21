@@ -1,16 +1,16 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
+
 export const useStoreLogin = defineStore("login", {
 	state: () => ({
-		usuarioLogueado: ref({}),
+		usuarioLogueado: {},
 
 		usuarioRegistrado: {
 			mail: "",
 			password: "",
 		},
-		usuarios: ref([]),
-		estaEsunavariableaborrar:12,
+		usuarios: [],
 	}),
 	getters: {
 		getUsuarios(state) {
@@ -20,28 +20,32 @@ export const useStoreLogin = defineStore("login", {
 	actions: {
 		ObtenerUsuarios() {
 			//Arma el link con la pagina
-			fetch("http://localhost:8080/api/usuario")
-				.then((response) => {
-					if (response.status === 200) {
-						return response.json(); // Convierte la respuesta a JSON
-					} else {
-						throw new Error("No se pudo obtener la información");
+			fetch("http://localhost:8080/api/usuario", {
+				method: "GET",
+				headers: { "content-type": "application/json" },
+			})
+				.then((res) => {
+					if (res.ok) {
+						return res.json();
 					}
+					// handle error
 				})
 				.then((data) => {
-					this.usuarios = data.data; //Obtengo el results que es donde esta mi vector que quiero trabajar
+					usuarios.value = data.data; //foreach y poner solo las del usuario logueado
+				})
+				.then((tasks) => {
+					// Do something with the list of tasks
 				})
 				.catch((error) => {
-					console.error(error);
+					// handle error
 				});
 		},
-	},
+	
 	LoguearUsuario() {
-		const us = ObtenerUsuarios()
 		fetch("http://localhost:8080/api/usuario/login", {
 			method: "POST",
 			headers: { "content-type": "application/json" },
-			body: JSON.stringify(usuarioRegistrado),
+			body: JSON.stringify(this.usuarioRegistrado),
 		})
 			.then((res) => {
 				if (res.ok) {
@@ -50,7 +54,8 @@ export const useStoreLogin = defineStore("login", {
 				// handle error
 			})
 			.then((data) => {
-				usuarioLogueado.value=data.message
+				alert("Logueo exitoso!")
+				this.usuarioLogueado = data.data
 			})
 			.then((task) => {
 				// Do something with updated task
@@ -58,7 +63,8 @@ export const useStoreLogin = defineStore("login", {
 			.catch((error) => {
 				// handle error
 			});
-        alert("Logueo exitoso!")
-    }
-    
+      
+		
+    }},
+
 });

@@ -16,14 +16,16 @@
             <router-link class="nav-link" to="/Confirmacion">Confirmacion</router-link>
           </li>
         </ul>
+        <div v-if="usuario != {}"> 
         <ul class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item">
+            <li class="nav-item">
             <router-link class="nav-link" to="/Login">Login</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/Registrarse">Registrarse</router-link>
           </li>
         </ul>
+      </div>
 
       </div>
     </div>
@@ -54,6 +56,10 @@
 </template>
 
 <script setup>
+  import { useStoreLogin } from '../stores/storeLogin.js';
+const store = useStoreLogin()
+
+const usuario = store.usuarioLogueado;
 
 </script>
 

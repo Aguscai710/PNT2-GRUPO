@@ -1,14 +1,23 @@
 <script setup>
+import { useStoreLogin } from '../../stores/storeLogin.js';
+const storeLogin = useStoreLogin()
+
+const usuario = storeLogin.usuarioLogueado
 const props = defineProps({
     libro: 0
 })
 
-const crearPeticion = () => {
+const crearPeticion = (idUser,idLibro) => {
+    const peticion = {
+        descripcion: "1 semana",
+        usuarioid: idUser,
+        libroid: idLibro,
+    }
 //Crear peticion y mandarla
     fetch("http://localhost:8080/api/peticion", {
         method: 'POST', // or PATCH
         headers: {'content-type':'application/json'},
-        body: JSON.stringify({peticion})
+        body: JSON.stringify(peticion)
         }).then(res => {
   if (res.ok) {
       return res.json();
@@ -21,6 +30,29 @@ const crearPeticion = () => {
 })
 alert("Peticion Creada!")
 }
+const crearConfirmacion = (id) =>{
+    const confirmacion = {
+        descripcion: "1 semana",
+        usuarioid: 3 ,                                      //usuarioLogueado
+        libroid: id,
+    }
+    fetch("http://localhost:8080/api/confirmacion", {
+        method: 'POST', // or PATCH
+        headers: {'content-type':'application/json'},
+        body: JSON.stringify(confirmacion)
+        }).then(res => {
+  if (res.ok) {
+      return res.json();
+  }
+  // handle error
+}).then(task => {
+  // Do something with updated task
+}).catch(error => {
+  // handle error
+})
+alert("Confirmacion Creada!")
+}
+
 
 </script>
 
@@ -32,8 +64,8 @@ alert("Peticion Creada!")
                 <h5 class="card-title"><b>Titulo:</b> {{ libro.titulo }}</h5>
                 <h5 class="card-title"><b>Descripción:</b> {{ libro.descripcion }}</h5>
                 <h5 class="card-title"><b>Autor:</b> {{ libro.autor }}</h5>
-                <h5 class="card-title"><b>Género:</b> {{ libro.genero }}</h5>
-                <button class="btn btn-primary" @click="crearPeticion"> PEDIR </button> <!--crearpeticion-->
+                <h5 class="card-title"><b>Género:</b> {{ libro.genero }}</h5>   
+                <button class="btn btn-primary" @click="crearPeticion(libro.Usuario.id,libro.id),crearConfirmacion(libro.id)"> PEDIR </button> <!--crearpeticion-->
             </div>
 
         </div>

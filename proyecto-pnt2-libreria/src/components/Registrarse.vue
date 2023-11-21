@@ -40,24 +40,9 @@ const crearUsuario = () => {
         })
         alert("Registro exitoso!")
         }
+        
     }
-const ObtenerUsuarios = () => {
-    //Arma el link con la pagina
-    fetch("https://654add315b38a59f28ee50e5.mockapi.io/Usuarios")
-        .then((response) => {
-            if (response.status === 200) {
-                return response.json(); // Convierte la respuesta a JSON
-            } else {
-                throw new Error("No se pudo obtener la información");
-            }
-        })
-        .then((data) => {
-            this.usuarios.value = data.results; //Obtengo el results que es donde esta mi vector que quiero trabajar
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-}
+
 
 
 </script>
@@ -75,7 +60,7 @@ const ObtenerUsuarios = () => {
             </div>
             <div class="mb-3">
                 <label for="contraseña" class="form-label">Password</label>
-                <input v-model="usuarioNuevo.contraseña" type="password" class="form-control" id="contraseña" required>
+                <input v-model="usuarioNuevo.password" type="password" class="form-control" id="contraseña" required>
             </div>
             <div class="mb-3">
                 <label for="contraseñaConf" class="form-label">Confirmar Password</label>
@@ -85,7 +70,7 @@ const ObtenerUsuarios = () => {
                 <label for="Telefono" class="form-label">Telefono</label>
                 <input v-model="usuarioNuevo.telefono" type="number" class="form-control" id="Telefono" required>
             </div>
-            <button class="btn btn-success" @click="crearUsuario" >Submit</button>
+            <button class="btn btn-success" @click="crearUsuario()" >Submit</button>
         </form>
     </div>
 </template>
