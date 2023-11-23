@@ -20,6 +20,7 @@ const crearPeticion = (idUser,idLibro) => {
         body: JSON.stringify(peticion)
         }).then(res => {
   if (res.ok) {
+    alert("Peticion Creada!")
       return res.json();
   }
   // handle error
@@ -28,12 +29,12 @@ const crearPeticion = (idUser,idLibro) => {
 }).catch(error => {
   // handle error
 })
-alert("Peticion Creada!")
+
 }
 const crearConfirmacion = (id) =>{
     const confirmacion = {
         descripcion: "1 semana",
-        usuarioid: 3 ,                                      //usuarioLogueado
+        usuarioid: usuario.id ,                                      //usuarioLogueado
         libroid: id,
     }
     fetch("http://localhost:8080/api/confirmacion", {
@@ -50,7 +51,6 @@ const crearConfirmacion = (id) =>{
 }).catch(error => {
   // handle error
 })
-alert("Confirmacion Creada!")
 }
 
 
@@ -65,7 +65,7 @@ alert("Confirmacion Creada!")
                 <h5 class="card-title"><b>Descripción:</b> {{ libro.descripcion }}</h5>
                 <h5 class="card-title"><b>Autor:</b> {{ libro.autor }}</h5>
                 <h5 class="card-title"><b>Género:</b> {{ libro.genero }}</h5>   
-                <button class="btn btn-primary" @click="crearPeticion(libro.Usuario.id,libro.id),crearConfirmacion(libro.id)"> PEDIR </button> <!--crearpeticion-->
+                <button class="btn btn-primary" @click.prevent="crearPeticion(libro.Usuario.id,libro.id),crearConfirmacion(libro.id)"> PEDIR </button> <!--crearpeticion-->
             </div>
 
         </div>

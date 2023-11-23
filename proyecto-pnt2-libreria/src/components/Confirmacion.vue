@@ -9,6 +9,7 @@ import { ref , onMounted} from 'vue'
 import { useStoreLogin } from '../../stores/storeLogin.js';
 
 const store = useStoreLogin()
+var usuario = store.usuarioLogueado
 
 const confirmaciones = ref([])
 
@@ -19,6 +20,7 @@ const aceptarConfirmacion = (id) => {
 			})
 				.then((res) => {
 					if (res.ok) {
+						alert("Confirmacion aceptada")
 						return res.json();
 					}
 					// handle error
@@ -39,6 +41,7 @@ const rechazarConfirmacion = (id) => {
 			})
 				.then((res) => {
 					if (res.ok) {
+						alert("Confirmacion rechazada")
 						return res.json();
 					}
 					// handle error
@@ -50,29 +53,31 @@ const rechazarConfirmacion = (id) => {
 					// handle error
 				});
 }
-const ObtenerConfirmaciones=()=> {
-			//Arma el link con la pagina
-			fetch("http://localhost:8080/api/confirmacion", {
-				method: "GET",
-				headers: { "content-type": "application/json" },
-			})
-				.then((res) => {
-					if (res.ok) {
-						return res.json();
-					}
-					// handle error
-				})
-				.then((data) => {
-					confirmaciones.value = data.data; //foreach y poner solo las del usuario logueado
-				})
-				.then((tasks) => {
-					// Do something with the list of tasks
-				})
-				.catch((error) => {
-					// handle error
-				});
-		}
-        
+const ObtenerConfirmaciones = () => {
+	//Arma el link con la pagina
+	fetch("http://localhost:8080/api/confirmacion", {
+		method: "GET",
+		headers: { "content-type": "application/json" },
+	})
+		.then((res) => {
+			if (res.ok) {
+				return res.json();
+			}
+			// handle error
+		})
+		.then((data) => {
+			data.data.forEach(element => {
+				if (element.Usuario.id == usuario.id) {
+					confirmaciones.value.push(element)
+				}
+
+			}); //foreach y poner solo las del usuario logueado
+		})
+		.catch((error) => {
+			// handle error
+		});
+}
+
 
 
 
@@ -93,8 +98,8 @@ onMounted(()=>{
                     <h5> <b>Por un tiempo de : {{ confirmacion.descripcion }} </b></h5>
                     <br>
                     <br>
-                    <button class="btn btn-success" @click="aceptarConfirmacion(confirmacion.id)" href=""> ACEPTAR </button>
-                    <button class="btn btn-danger" @click="rechazarConfirmacion(confirmacion.id)" href=""> RECHAZAR </button>
+                    <button class="btn btn-success" @click.prevent="aceptarConfirmacion(confirmacion.id)" href=""> ACEPTAR </button>
+                    <button class="btn btn-danger" @click.prevent="rechazarConfirmacion(confirmacion.id)" href=""> RECHAZAR </button>
                 </div>
             </div>
         </div>

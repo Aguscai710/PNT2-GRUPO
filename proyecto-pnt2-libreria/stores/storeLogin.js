@@ -4,7 +4,10 @@ import { ref } from "vue";
 
 export const useStoreLogin = defineStore("login", {
 	state: () => ({
-		usuarioLogueado: {},
+		usuarioLogueado: {
+			id: 0,
+			name:""
+		},
 
 		usuarioRegistrado: {
 			mail: "",
@@ -54,17 +57,17 @@ export const useStoreLogin = defineStore("login", {
 				// handle error
 			})
 			.then((data) => {
-				alert("Logueo exitoso!")
 				this.usuarioLogueado = data.data
-			})
-			.then((task) => {
-				// Do something with updated task
 			})
 			.catch((error) => {
 				// handle error
 			});
       
 		
-    }},
+    },
+	Logout(){
+		this.usuarioLogueado.id = 0
+	},
+},
 
 });

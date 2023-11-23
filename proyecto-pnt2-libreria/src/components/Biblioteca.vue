@@ -8,7 +8,6 @@
 import Libro from './Libro.vue'
 import { ref, onMounted } from 'vue'
 import { useStoreBiblioteca } from '../../stores/storeBiblioteca';
-import Confirmacion from './Confirmacion.vue';
 const store = useStoreBiblioteca()
 
 

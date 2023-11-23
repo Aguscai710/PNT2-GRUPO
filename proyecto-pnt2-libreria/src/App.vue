@@ -1,3 +1,8 @@
+<script setup>
+  import { useStoreLogin } from '../stores/storeLogin.js';
+const store = useStoreLogin()
+
+</script>
 <template>
   <div class="chau">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -9,6 +14,11 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/MisLibros">Mis Libros</router-link>
           </li>
+          <div v-if="store.usuarioLogueado.id != 0">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/RegistroLibro">Crear Libro</router-link>
+          </li>
+        </div>
           <li class="nav-item">
             <router-link class="nav-link" to="/Peticiones">Peticiones</router-link>
           </li>
@@ -16,7 +26,7 @@
             <router-link class="nav-link" to="/Confirmacion">Confirmacion</router-link>
           </li>
         </ul>
-        <div v-if="usuario != {}"> 
+        <div v-if="store.usuarioLogueado.id == 0">  
         <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
             <router-link class="nav-link" to="/Login">Login</router-link>
@@ -26,6 +36,17 @@
           </li>
         </ul>
       </div>
+      <div v-if="store.usuarioLogueado.id != 0">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <h4>{{store.usuarioLogueado.name}}</h4>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-danger" @click.prevent="store.Logout">Logout</button>
+          </li>
+        </ul>
+      </div>
+     
 
       </div>
     </div>
@@ -54,14 +75,6 @@
 
 
 </template>
-
-<script setup>
-  import { useStoreLogin } from '../stores/storeLogin.js';
-const store = useStoreLogin()
-
-const usuario = store.usuarioLogueado;
-
-</script>
 
 <style scoped>
 .back{

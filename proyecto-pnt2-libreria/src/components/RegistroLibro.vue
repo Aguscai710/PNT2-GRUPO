@@ -1,12 +1,16 @@
 <script setup>
+  import { useStoreLogin } from '../../stores/storeLogin.js';
 
+const store = useStoreLogin()
+ var usuario = store.usuarioLogueado
 
 const libroNuevo = {
     titulo:'',
     genero:'',
     autor:'',
     descripcion:'',
-    imagen:''
+    imagen:'',
+    usuarioid: usuario.id
 
 
 }
@@ -19,6 +23,7 @@ const crearLibro = () => {
   body: JSON.stringify(libroNuevo)
 }).then(res => {
   if (res.ok) {
+    alert("Libro Creado!")
       return res.json();
   }
   // handle error
@@ -27,7 +32,6 @@ const crearLibro = () => {
 }).catch(error => {
   // handle error
 })
-alert("enviado!")
 }
 
 
@@ -58,7 +62,7 @@ alert("enviado!")
                 <label for="imagen" class="form-label">Imagen</label>
                 <input v-model="libroNuevo.imagen" type="text" class="form-control" id="imagen" required>
             </div>
-            <button type="submit" class="btn btn-success" @click="crearLibro" > PUBLICAR </button>
+            <button class="btn btn-success" @click.prevent="crearLibro" > PUBLICAR </button>
         </form>
     </div>
 </template>

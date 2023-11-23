@@ -10,10 +10,10 @@
 
 <template>
 
-    {{ store.usuarioLogueado }}
+
     <div class="background">
         <div class="margen">
-            <form>
+            <form @submit.prevent="store.LoguearUsuario()">
                 <div class="mb-3">
                     <label for="mail" class="form-label">Email address</label>
                     <input v-model="store.usuarioRegistrado.mail" type="email" class="form-control" id="mail" aria-describedby="emailHelp" required>
@@ -22,7 +22,7 @@
                     <label for="password" class="form-label">Password</label>
                     <input v-model="store.usuarioRegistrado.password" type="password" class="form-control" id="password" required>
                 </div>
-                <button class="btn btn-success" @click="store.LoguearUsuario()">Submit</button>
+                <button class="btn btn-success">Submit</button>
             </form>
         </div>
     </div>

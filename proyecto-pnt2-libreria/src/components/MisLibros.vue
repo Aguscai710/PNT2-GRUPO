@@ -21,6 +21,7 @@ const borrarLibro=(id)=> {
 			})
 				.then((res) => {
 					if (res.ok) {
+                        alert("Libro Eliminado")
 						return res.json();
 					}
 					// handle error
@@ -48,7 +49,12 @@ const ObtenerLibros=()=> {
 					// handle error
 				})
 				.then((data) => {
-					libros.value = data.data;   //foreach y poner solo las del usuario logueado
+					data.data.forEach(element => {
+                        if(element.Usuario.id == usuario.id){
+                            libros.value.push(element)
+                        }
+                    
+                    }); //foreach y poner solo las del usuario logueado
 				})
 				.then((tasks) => {
 					// Do something with the list of tasks
@@ -58,7 +64,6 @@ const ObtenerLibros=()=> {
 				});
 		}
 
-
 onMounted(()=>{
     ObtenerLibros()
 })
@@ -66,7 +71,6 @@ onMounted(()=>{
 
 <template>
     <div class="margen">
-        <a href="./RegistroLibro">Registrar Libro Nuevo</a>
         <div class="row">
             <div class="col-12 contenedor">
                 <div v-for="(libro) in libros">
@@ -78,7 +82,7 @@ onMounted(()=>{
                                 <h5 class="card-title"><b>Descripción:</b> {{ libro.descripcion }}</h5>
                                 <h5 class="card-title"><b>Autor:</b> {{ libro.autor }}</h5>
                                 <h5 class="card-title"><b>Género:</b> {{ libro.genero }}</h5>
-                               <i @click="borrarLibro(libro.id)" class='bx bx-x bx-md bx-tada-hover'></i>
+                               <i @click.prevent="borrarLibro(libro.id)" class='bx bx-x bx-md bx-tada-hover'></i>
                             </div>
                         </div>
                     </div>
