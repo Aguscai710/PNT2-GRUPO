@@ -20,10 +20,10 @@ const store = useStoreLogin()
           </li>
         </div>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Peticiones">Peticiones</router-link>
+            <router-link class="nav-link" to="/Peticiones">Libros Solicitados</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Confirmacion">Confirmacion</router-link>
+            <router-link class="nav-link" to="/Confirmacion">Libros a Confirmar</router-link>
           </li>
         </ul>
         <div v-if="store.usuarioLogueado.id == 0">  

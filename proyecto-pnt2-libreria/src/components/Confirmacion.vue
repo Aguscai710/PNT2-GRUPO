@@ -21,6 +21,7 @@ const aceptarConfirmacion = (id) => {
 				.then((res) => {
 					if (res.ok) {
 						alert("Confirmacion aceptada")
+					
 						return res.json();
 					}
 					// handle error
@@ -42,6 +43,25 @@ const rechazarConfirmacion = (id) => {
 				.then((res) => {
 					if (res.ok) {
 						alert("Confirmacion rechazada")
+						
+						return res.json();
+					}
+					// handle error
+				})
+				.then((tasks) => {
+					// Do something with the list of tasks
+				})
+				.catch((error) => {
+					// handle error
+				});
+}
+const borrarPeticion = (id) => {
+    fetch(`http://localhost:8080/api/peticion/${id}`, {
+				method: "DELETE",
+				headers: { "content-type": "application/json" },
+			})
+				.then((res) => {
+					if (res.ok) {
 						return res.json();
 					}
 					// handle error
@@ -90,16 +110,17 @@ onMounted(()=>{
     <div class="margen">
 
         <div class="row">
-            <div v-for="confirmacion in confirmaciones" class="card" style="width: 30rem;">
+            <div v-for="confirmacion in confirmaciones" class="card" style="width: 23rem;">
             <div class="card-body">
-                <div class="container-carta">
-                    <h5 class="card-title"><b>El usuario:</b> {{ confirmacion.Usuario.nombre }}</h5>
-                    <h5 class="card-title"><b>Quiere tu libro:</b> {{ confirmacion.Libro.titulo }}</h5>
+                <div class="container-carta"  style="text-align: center;">
+					<h5 class="card-title" style="font-size: 1.5em;"><b>Alguien quiere tu libro</b></h5>
+					<br>
+                    <h5 class="card-title"><b>Libro:</b> {{ confirmacion.Libro.titulo }}</h5>
                     <h5> <b>Por un tiempo de : {{ confirmacion.descripcion }} </b></h5>
                     <br>
-                    <br>
-                    <button class="btn btn-success" @click.prevent="aceptarConfirmacion(confirmacion.id)" href=""> ACEPTAR </button>
-                    <button class="btn btn-danger" @click.prevent="rechazarConfirmacion(confirmacion.id)" href=""> RECHAZAR </button>
+
+                    <button class="btn btn-success" @click.prevent="aceptarConfirmacion(confirmacion.id), borrarPeticion(confirmacion.id)" href=""> ACEPTAR </button>
+                    <button class="btn btn-danger" @click.prevent="rechazarConfirmacion(confirmacion.id),borrarPeticion(confirmacion.id)" href=""> RECHAZAR </button>
                 </div>
             </div>
         </div>

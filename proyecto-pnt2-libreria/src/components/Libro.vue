@@ -7,10 +7,10 @@ const props = defineProps({
     libro: 0
 })
 
-const crearPeticion = (idUser,idLibro) => {
+const crearPeticion = (idLibro) => {
     const peticion = {
         descripcion: "1 semana",
-        usuarioid: idUser,
+        usuarioid: usuario.id,
         libroid: idLibro,
     }
 //Crear peticion y mandarla
@@ -31,11 +31,11 @@ const crearPeticion = (idUser,idLibro) => {
 })
 
 }
-const crearConfirmacion = (id) =>{
+const crearConfirmacion = (idUser, idLibro) =>{
     const confirmacion = {
         descripcion: "1 semana",
-        usuarioid: usuario.id ,                                      //usuarioLogueado
-        libroid: id,
+        usuarioid: idUser ,                                      //usuarioLogueado
+        libroid: idLibro,
     }
     fetch("http://localhost:8080/api/confirmacion", {
         method: 'POST', // or PATCH
@@ -65,7 +65,7 @@ const crearConfirmacion = (id) =>{
                 <h5 class="card-title"><b>Descripción:</b> {{ libro.descripcion }}</h5>
                 <h5 class="card-title"><b>Autor:</b> {{ libro.autor }}</h5>
                 <h5 class="card-title"><b>Género:</b> {{ libro.genero }}</h5>   
-                <button class="btn btn-primary" @click.prevent="crearPeticion(libro.Usuario.id,libro.id),crearConfirmacion(libro.id)"> PEDIR </button> <!--crearpeticion-->
+                <button class="btn btn-primary" @click.prevent="crearPeticion(libro.id),crearConfirmacion(libro.Usuario.id,libro.id)"> PEDIR </button> <!--crearpeticion-->
             </div>
 
         </div>
