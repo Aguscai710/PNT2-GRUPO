@@ -11,7 +11,8 @@ const usuarioNuevo = {
         password: "",
         contraseñaConfirmada: "",
         telefono: "",
-        usuario: ""
+        usuario: "",
+        rol: "Usuario"
     }
 
 
@@ -20,7 +21,8 @@ const crearUsuario = () => {
         nombre: usuarioNuevo.usuario,
         password:usuarioNuevo.password ,
         mail: usuarioNuevo.email,
-        telefono: usuarioNuevo.telefono
+        telefono: usuarioNuevo.telefono,
+        rol: usuarioNuevo.rol
     }
 
      if ( usuarioNuevo.password == usuarioNuevo.contraseñaConfirmada ) {

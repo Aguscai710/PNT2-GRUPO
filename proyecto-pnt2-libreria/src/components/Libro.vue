@@ -65,7 +65,7 @@ const crearConfirmacion = (idUser, idLibro) =>{
                 <h5 class="card-title"><b>Descripción:</b> {{ libro.descripcion }}</h5>
                 <h5 class="card-title"><b>Autor:</b> {{ libro.autor }}</h5>
                 <h5 class="card-title"><b>Género:</b> {{ libro.genero }}</h5>   
-                <button class="btn btn-primary" @click.prevent="crearPeticion(libro.id),crearConfirmacion(libro.Usuario.id,libro.id)"> PEDIR </button> <!--crearpeticion-->
+                <button v-if="libro.Usuario.id!=usuario.id" class="btn btn-primary" @click.prevent="crearPeticion(libro.id),crearConfirmacion(libro.Usuario.id,libro.id)"> PEDIR </button> <!--crearpeticion-->
             </div>
 
         </div>

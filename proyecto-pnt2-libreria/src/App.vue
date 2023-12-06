@@ -25,6 +25,9 @@ const store = useStoreLogin()
           <li class="nav-item">
             <router-link class="nav-link" to="/Confirmacion">Libros a Confirmar</router-link>
           </li>
+          <li v-if="store.usuarioLogueado.rol == 'Administrador'" class="nav-item">
+            <router-link class="nav-link" to="/Estadistica">Estadisticas Generales</router-link>
+          </li>
         </ul>
         <div v-if="store.usuarioLogueado.id == 0">  
         <ul class="navbar-nav mb-2 mb-lg-0">
@@ -69,8 +72,6 @@ const store = useStoreLogin()
     <p class="text-center text-muted">©️ 2023 BookXchange, Inc</p>
   </footer>
   </div>
-
-
 
 
 

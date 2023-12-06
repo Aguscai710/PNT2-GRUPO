@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import {vueCookies} from "vue-cookies"
 
 
 export const useStoreLogin = defineStore("login", {
@@ -57,6 +58,7 @@ export const useStoreLogin = defineStore("login", {
 				// handle error
 			})
 			.then((data) => {
+				document.cookie="Usuario ="+data.data;
 				this.usuarioLogueado = data.data
 			})
 			.catch((error) => {
