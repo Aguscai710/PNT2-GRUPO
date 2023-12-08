@@ -21,7 +21,7 @@ const aceptarConfirmacion = (id) => {
 				.then((res) => {
 					if (res.ok) {
 						alert("Confirmacion aceptada")
-					
+						confirmaciones.value = confirmaciones.value.filter(confirmacion => confirmacion.id != id)
 						return res.json();
 					}
 					// handle error
@@ -43,7 +43,7 @@ const rechazarConfirmacion = (id) => {
 				.then((res) => {
 					if (res.ok) {
 						alert("Confirmacion rechazada")
-						
+						confirmaciones.value = confirmaciones.value.filter(confirmacion => confirmacion.id != id)
 						return res.json();
 					}
 					// handle error

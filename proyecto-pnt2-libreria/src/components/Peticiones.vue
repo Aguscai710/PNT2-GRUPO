@@ -19,6 +19,7 @@ const borrarPeticion=(id)=>{
 			})
 				.then((res) => {
 					if (res.ok) {
+						peticiones.value = peticiones.value.filter(peticion => peticion.id != id)
 						return res.json();
 					}
 					// handle error

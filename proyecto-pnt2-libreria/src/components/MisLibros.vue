@@ -21,13 +21,16 @@ const borrarLibro=(id)=> {
 			})
 				.then((res) => {
 					if (res.ok) {
-                        alert("Libro Eliminado")
+                        alert("Libro Eliminado");
+                        libros.value = libros.value.filter(libro => libro.id != id)
 						return res.json();
+                        
 					}
 					// handle error
 				})
 				.then((tasks) => {
-					// Do something with the list of tasks
+					
+
 				})
 				.catch((error) => {
 					// handle error
@@ -70,6 +73,7 @@ onMounted(()=>{
 </script>
 
 <template>
+
     <div class="margen">
         <div class="row">
             <div class="col-12 contenedor">
