@@ -98,11 +98,96 @@ const ObtenerConfirmaciones = () => {
 		});
 }
 
+let estadistica=ref({
+    
+})
+
+
+const ObtenerEstadisticas=()=> {
+			fetch("http://localhost:8080/api/estadistica/1", {
+				method: "GET",
+				headers: { "content-type": "application/json" },
+			})
+				.then((res) => {
+					if (res.ok) {
+						return res.json();
+					}
+					// handle error
+				})
+				.then((data) => {
+					estadistica.value=data.data //foreach y poner solo las del usuario logueado
+				})
+                .catch((error) => {
+					// handle error
+				});
+				
+				
+		}
+
+const sumarAceptado=()=> {
+			let aceptados=estadistica.value.aceptados;
+			let rechazados=estadistica.value.rechazados;
+			let estadisticaActualizada = {
+				aceptados:aceptados+1,
+				rechazados
+			}
+			fetch("http://localhost:8080/api/estadistica/1", {
+				method: "PUT",
+				headers: { "content-type": "application/json" },
+				body: JSON.stringify(estadisticaActualizada)
+			})
+				.then((res) => {
+					if (res.ok) {
+						ObtenerEstadisticas()
+						return res.json();
+					}
+					// handle error
+				})
+				.then((data) => {
+					estadistica.value=data.data //foreach y poner solo las del usuario logueado
+				})
+                .catch((error) => {
+					// handle error
+				});
+				
+				
+		}
+
+		const sumarRechazado=()=> {
+			let aceptados=estadistica.value.aceptados;
+			let rechazados=estadistica.value.rechazados;
+			let estadisticaActualizada = {
+				aceptados,
+				rechazados:rechazados+1
+			}
+			fetch("http://localhost:8080/api/estadistica/1", {
+				method: "PUT",
+				headers: { "content-type": "application/json" },
+				body: JSON.stringify(estadisticaActualizada)
+			})
+				.then((res) => {
+					if (res.ok) {
+						ObtenerEstadisticas()
+						return res.json();
+					}
+					// handle error
+				})
+				.then((data) => {
+					estadistica.value=data.data //foreach y poner solo las del usuario logueado
+				})
+                .catch((error) => {
+					// handle error
+				});
+				
+				
+		}
+
 
 
 
 onMounted(()=>{
-    ObtenerConfirmaciones()
+    ObtenerConfirmaciones(),
+	ObtenerEstadisticas()
 })
 </script>
 
@@ -119,8 +204,8 @@ onMounted(()=>{
                     <h5> <b>Por un tiempo de : {{ confirmacion.descripcion }} </b></h5>
                     <br>
 
-                    <button class="btn btn-success" @click.prevent="aceptarConfirmacion(confirmacion.id), borrarPeticion(confirmacion.id)" href=""> ACEPTAR </button>
-                    <button class="btn btn-danger" @click.prevent="rechazarConfirmacion(confirmacion.id),borrarPeticion(confirmacion.id)" href=""> RECHAZAR </button>
+                    <button class="btn btn-success" @click.prevent="aceptarConfirmacion(confirmacion.id), borrarPeticion(confirmacion.id),sumarAceptado()" href=""> ACEPTAR </button>
+                    <button class="btn btn-danger" @click.prevent="rechazarConfirmacion(confirmacion.id),borrarPeticion(confirmacion.id), sumarRechazado()" href=""> RECHAZAR </button>
                 </div>
             </div>
         </div>
